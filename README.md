@@ -55,3 +55,34 @@ Mostra o histórico de todos os commits
 
 1.  Use `git log --all` para verificar o hash do commit que você quer inserir na sua branch.
 2.  Já no `HEAD` da branch que deseja aplicar o commit, utilize `git cherry-pick <commit_hash>` para aplicar as mudanças introduzidas pelo commit ou `git cherry-pick <branch-name>` para aplicar as mudanças introduzidas pelo commit no `HEAD` daquela branch.
+
+### Limpar o cache do Git sem remover arquivos do disco
+
+[Fonte](http://www.randallkent.com/2010/04/30/gitignore-not-working/)
+
+Isso acontece quando um arquivo é inicialmente rastreado pelo Git mas em algum momento no futuro esse arquivo é adicionado ao .gitignore. Se esse arquivo for removido do projeto logo após essa adição, sua remoção precisará ser commitada. Se ele for adicionado novamente no mesmo diretório onde estava antes por algum motivo,ele provavelmente será rastreado também.
+
+Para resolver o problema de arquivo persistente, limpe o cache do Git das seguinte formas:
+
+#### Opção 1
+
+Remove todos os arquivos do cache do Git (ou seja, para de rastrear todos os arquivos, mas os matém no disco) e faz o commit de tudo, menos dos arquivos persistentes após adição no .gitignore. Isso vai basicamente adicionar todos os arquivos novamente.
+
+```sh
+## Remove todos os arquivos do Git, sem remover do disco
+git rm -r --cached .
+
+# Aiciona novamente todos os arquivos ao Git
+git add .
+
+# Commita arquivos, sem os arquivos em cache
+git commit
+```
+
+### Opção 2
+
+Remove do cache apenas os arquivos do cache cache que estão listados no `.gitignore`:
+
+```
+for file in `cat .gitignore` ; do git rm -r --cached $file ; done
+```
