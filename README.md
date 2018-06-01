@@ -29,7 +29,31 @@ Mostra o histórico de todos os commits
 ### Atualizar seu código local com a última versão do repositório remoto
 
 1.  Use `git pull --rebase`. É semelhante ao `git pull`, mas commits de merge não são criados, o que reduz a poluição do histórico do projeto.
-2.  Em caso de conflito, resolva os conflito, salve os arquivo, faça o staging com `git add .` ou `git add <nome_arquivo>` e em seguida `git rebase --continue`.
+2.  Em caso de conflito, resolva os conflito, salve os arquivo, faça o staging com `git add .` ou `git add <nome-arquivo>` e em seguida `git rebase --continue`.
+
+### Trazer commits de uma branch para outra
+
+1.  Faça checkout na branch onde você deseja aplicar os commits com `git checkout <branch-destino>`.
+2.  Faça o merge dos commits da branch de onde você deseja trazer os commits com `git merge <branch-origem>`.
+
+Alternativamente você pode utilizar `git merge <branch-destino> <branch-origem>`.
+
+### Aplicar commits de um branch local em cima de outro branch
+
+1.  Atualize o branch sobre o qual você deseja aplicar seus commits locais com `git pull` ou `git pull --rebase`.
+2.  Faça checkout em seu branch local com `git checkout <branch-local>`
+3.  Use `git rebase <branch-destino>` para aplicar todos os commits do `<branch-local>` seu branch local em cima do `<branch-destino>`.
+
+Alternativamente você pode utilizar `git rebase <branch-destino> <branch-local>`.
+
+Ex:
+
+```sh
+# Isso moverá os commits da branch feature/style para cima da branch develop
+git rebase develop feature/style
+```
+
+> Não faça isso a partir de um branch que esteja publicado em seu repositório remoto. O rebase reescreve o histórico da branch.
 
 ### Navegar em um commit anterior
 
