@@ -1,8 +1,37 @@
 # Aprenda Git
 
-> Um guia básico para começar no Git.
+> Um guia fácil para começar no Git.
+
+## Sumário
+
+-   [Conceitos básicos de Git]()
+-   [Configuração inicial]()
+-   [Comandos úteis]()
+-   [Situações e problemas comuns]()
+-   [Um dia de trabalho qualquer com Git]()
 
 ## Conceitos básicos de Git
+
+Em breve.
+
+## Configuração inicial
+
+Antes de utilizar o Git é interessantes fazer algumas configurações. Você pode dizer a ele seu nome e seu e-mail, por exemplo, para que eles fiquem registrados nos commits que você fizer. Para isso abra o terminal e digite:
+
+```sh
+git config --global user.name "Seu Nome"
+git config --global user.email seuemail@exemplo.com
+```
+
+Para mudar o editor de texto padrão, utilize:
+
+```sh
+git config --global core.editor "nano"
+```
+
+Você pode escolher o editor que preferir no lugar do `nano`, mas é o recomendado para iniciantes por ser mais fácil de usar do que o `vi`, por exemplo.
+
+A flag `--global` sinaliza que essa configuração será o padrão para todos os projetos. Para configurar uma variável apenas para um projeto específico, navegue até ele pelo terminal e utilize `git config` sem a flag `--global`.
 
 ## Comandos úteis
 
@@ -12,13 +41,33 @@
 
 Mostra o histórico de todos os commits
 
-## Situações comuns
+### `git add`
+
+### `git commit`
+
+### `git reset`
+
+### `git checkout`
+
+### `git pull`
+
+### `git push`
+
+### `git rebase`
+
+### `git cherry-pick`
+
+## Um dia de trabalho qualquer com Git
+
+Em breve.
+
+## Situações e problemas comuns
 
 ### Elencar/rastrear arquivos
 
 1.  Use `git add <nome-do-arquivo>` para elencar um arquivo específico ou `git add .` para elencar todos os arquivos detectáveis pelo Git.
 
-### Descartar alterações no working directory
+### Descartar alterações no Working Directory
 
 1.  Use `git checkout -- <nome-do-arquivo>` para descartar alterações no arquivo. Serve apenas para arquivos ainda não elencados, mas modificados ou não-rastreados.
 
@@ -31,10 +80,10 @@ Mostra o histórico de todos os commits
 1.  Use `git pull --rebase`. É semelhante ao `git pull`, mas commits de merge não são criados, o que reduz a poluição do histórico do projeto.
 2.  Em caso de conflito, resolva os conflito, salve os arquivo, faça o staging com `git add .` ou `git add <nome-arquivo>` e em seguida `git rebase --continue`.
 
-### Trazer commits de uma branch para outra
+### Trazer commits de um branch para outro
 
-1.  Faça checkout na branch onde você deseja aplicar os commits com `git checkout <branch-destino>`.
-2.  Faça o merge dos commits da branch de onde você deseja trazer os commits com `git merge <branch-origem>`.
+1.  Faça checkout no branch onde você deseja aplicar os commits com `git checkout <branch-destino>`.
+2.  Faça o merge dos commits do branch de onde você deseja trazer os commits com `git merge <branch-origem>`.
 
 Alternativamente você pode utilizar `git merge <branch-destino> <branch-origem>`.
 
@@ -53,7 +102,7 @@ Ex:
 git rebase develop feature/style
 ```
 
-> Não faça isso a partir de um branch que esteja publicado em seu repositório remoto. O rebase reescreve o histórico da branch.
+> Não faça isso a partir de um branch que esteja publicado em seu repositório remoto. O rebase reescreve o histórico do branch.
 
 ### Navegar em um commit anterior
 
@@ -61,7 +110,7 @@ git rebase develop feature/style
 
 1.  Use `git log` para ver o hash dos commits.
 2.  Digite `git checkout <commit_hash>`, onde `<commit_hash>` é o hash do commit que você deseja visualizar.
-3.  Se quiser fazer alterações e preservá-las, crie uma nova branch com `git checkout -b <branch-name>` e edite à vontade.
+3.  Se quiser fazer alterações e preservá-las, crie um novo branch com `git checkout -b <branch-name>` e edite à vontade.
 
 ### Desfazer o último commit (local)
 
@@ -77,8 +126,8 @@ git rebase develop feature/style
 
 > Requer `HEAD` limpo!
 
-1.  Use `git log --all` para verificar o hash do commit que você quer inserir na sua branch.
-2.  Já no `HEAD` da branch que deseja aplicar o commit, utilize `git cherry-pick <commit_hash>` para aplicar as mudanças introduzidas pelo commit ou `git cherry-pick <branch-name>` para aplicar as mudanças introduzidas pelo commit no `HEAD` daquela branch.
+1.  Use `git log --all` para verificar o hash do commit que você quer inserir no seu branch.
+2.  Já no `HEAD` do branch que deseja aplicar o commit, utilize `git cherry-pick <commit_hash>` para aplicar as mudanças introduzidas pelo commit ou `git cherry-pick <branch-name>` para aplicar as mudanças introduzidas pelo commit no `HEAD` daquele branch.
 
 ### Limpar o cache do Git sem remover arquivos do disco
 
@@ -88,25 +137,25 @@ Isso acontece quando um arquivo é inicialmente rastreado pelo Git mas em algum 
 
 Para resolver o problema de arquivo persistente, limpe o cache do Git das seguinte formas:
 
-#### Opção 1
+#### Opção 1 - Mais fácil de entender
 
 Remove todos os arquivos do cache do Git (ou seja, para de rastrear todos os arquivos, mas os matém no disco) e faz o commit de tudo, menos dos arquivos persistentes após adição no .gitignore. Isso vai basicamente adicionar todos os arquivos novamente.
 
 ```sh
-## Remove todos os arquivos do Git, sem remover do disco
-git rm -r --cached .
-
-# Aiciona novamente todos os arquivos ao Git
-git add .
-
-# Commita arquivos, sem os arquivos em cache
-git commit
+git rm -r --cached .    # Remove todos os arquivos do Git, sem remover do disco
+git add .               # Adiciona novamente todos os arquivos ao Git
+git commit              # Commita arquivos, sem os arquivos em cache
 ```
 
-### Opção 2
+#### Opção 2 - Mais eficiente
 
-Remove do cache apenas os arquivos do cache cache que estão listados no `.gitignore`:
+Remove do cache apenas os arquivos que estão listados no `.gitignore`:
 
 ```
 for file in `cat .gitignore` ; do git rm -r --cached $file ; done
 ```
+
+## Para se aprofundar mais
+
+-   [Git e Github para iniciantes (Curso gratuito)](https://www.udemy.com/git-e-github-para-iniciantes/)
+-   [Pro Git (Livro gratuito)](https://git-scm.com/book/pt-br/v2)
