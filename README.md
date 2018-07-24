@@ -65,15 +65,15 @@ Em breve.
 
 ### Elencar/rastrear arquivos
 
-1.  Use `git add <nome-do-arquivo>` para elencar um arquivo específico ou `git add .` para elencar todos os arquivos detectáveis pelo Git.
+Use `git add <nome-do-arquivo>` para elencar um arquivo específico ou `git add .` para elencar todos os arquivos detectáveis pelo Git.
 
 ### Descartar alterações no Working Directory
 
-1.  Use `git checkout -- <nome-do-arquivo>` para descartar alterações no arquivo. Serve apenas para arquivos ainda não elencados, mas modificados ou não-rastreados.
+Use `git checkout -- <nome-do-arquivo>` para descartar alterações no arquivo. Serve apenas para arquivos ainda não elencados, mas modificados ou não-rastreados.
 
 ### Deselencar arquivos
 
-1.  Use `git reset HEAD <nome-do-arquivo>` para remover ele dos arquivos elencados. As alterações serão preservadas, mas ele voltará à working tree.
+Use `git reset HEAD <nome-do-arquivo>` para remover ele dos arquivos elencados. As alterações serão preservadas, mas ele voltará à working tree.
 
 ### Atualizar seu código local com a última versão do repositório remoto
 
@@ -120,9 +120,18 @@ git rebase develop feature/style
 
 ### Desfazer commits locais até um commit específico (local)
 
-1.  Utilize os comandos anteriores de forma semelhante, mas em vez do `HEAD^`, utilize a hash último commit que deseja preservar. Todos os commits entre o `HEAD` e o commit do hash digitado (não incluso) serão desfeitos. O comportamento de preservar as mudanças ou não dependem das flags `--soft`, `--mixed`, `--hard`.
+Utilize os comandos anteriores de forma semelhante, mas em vez do `HEAD^`, utilize a hash último commit que deseja preservar. Todos os commits entre o `HEAD` e o commit do hash digitado (não incluso) serão desfeitos. O comportamento de preservar as mudanças ou não dependem das flags `--soft`, `--mixed`, `--hard`.
 
-### Inserir as mudanças de um commit no `HEAD` atual
+### Desfazer o primeiro commit em um repositório
+
+É preciso remover o branch atual, mas não é recomendável utilizar `git branch -D <nome-do-branch>`. Em vez disso, utilize:
+
+```sh
+git update-ref -d HEAD
+```
+
+
+### Inserir as **mudanças** de um commit no `HEAD` atual
 
 > Requer `HEAD` limpo!
 
@@ -149,9 +158,9 @@ git commit              # Commita arquivos, sem os arquivos em cache
 
 #### Opção 2 - Mais eficiente
 
-Remove do cache apenas os arquivos que estão listados no `.gitignore`:
+Remove do cache apenas os arquivos que estão listados no `.gitignore`. Execute no `bash`:
 
-```
+```sh
 for file in `cat .gitignore` ; do git rm -r --cached $file ; done
 ```
 
