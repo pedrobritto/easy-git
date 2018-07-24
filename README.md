@@ -130,7 +130,6 @@ Utilize os comandos anteriores de forma semelhante, mas em vez do `HEAD^`, utili
 git update-ref -d HEAD
 ```
 
-
 ### Inserir as **mudanças** de um commit no `HEAD` atual
 
 > Requer `HEAD` limpo!
@@ -163,6 +162,12 @@ Remove do cache apenas os arquivos que estão listados no `.gitignore`. Execute 
 ```sh
 for file in `cat .gitignore` ; do git rm -r --cached $file ; done
 ```
+
+### Remover referência local a um branch que não existe mais no `remote`
+
+Execute `git remote prune <nome-do-remote>` (normalmente `origin`). Assim se houver a referência um branch `origin/branch1` em seu repositório local ao executar `git log`, por exemplo, ela será removida.
+
+Note que isso não afetará nenhum branch local. No exemplo acima, o branch `branch1` continuará existindo, sem alguma alteração.
 
 ## Para se aprofundar mais
 
