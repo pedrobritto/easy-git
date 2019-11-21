@@ -169,6 +169,18 @@ Execute `git remote prune <nome-do-remote>` (normalmente `origin`). Assim se hou
 
 Note que isso não afetará nenhum branch local. No exemplo acima, o branch `branch1` continuará existindo, sem alguma alteração.
 
+### Atualizar todos os branchs com as últimas referências do `remote`, inclusive branchs removidos
+
+Execute `git fetch --all --prune`.
+
+### Modificar a referência de um branch local
+
+Execute `git branch -f <nome-do-branch> <novo-head>`. `<novo-head>` pode ser outro branch ou um hash de commit.
+
+### Desfazer problemas
+
+Execute `git reflog` para listar todas as alterações no histórico. Use `git reset <ref>` para reverter alteração para o estado específico. Evita muita dor de cabeça com rebases defeituosos e percas de commits. 
+
 ## Para se aprofundar mais
 
 -   [Git e Github para iniciantes (Curso gratuito)](https://www.udemy.com/git-e-github-para-iniciantes/)
